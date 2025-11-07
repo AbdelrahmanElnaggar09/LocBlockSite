@@ -7,9 +7,7 @@
     <meta name="description" content="Frequently asked questions about LocBlock - location-based app blocker for iOS. Learn how it works, privacy details, troubleshooting, and more.">
     
     <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="logo-180.png">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="finalogo.png">
     
     <!-- Custom Font for Brand -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,12 +50,23 @@
         }
 
         .logo {
-            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo img {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(23, 19, 50, 0.35);
+        }
+
+        .logo span {
+            font-size: 26px;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff, #a8edea);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            letter-spacing: -0.01em;
         }
 
         .nav-links {
@@ -247,7 +256,10 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">🎯 LocBlock</div>
+            <div class="logo">
+                <img src="finalogo.png" alt="LocBlock logo">
+                <span>LocBlock</span>
+            </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="faq.html">FAQ</a></li>
