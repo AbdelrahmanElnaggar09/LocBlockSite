@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocBlock - Location-Based App Blocking</title>
+    <meta name="description" content="Block distracting apps automatically when you enter your focus locations. Privacy-first, no data collection.">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo-180.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Custom Font for Brand -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: #1a202c;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Animated background blobs */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        body::before {
+            background: radial-gradient(circle, #8b5cf6, transparent);
+            top: -200px;
+            left: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        body::after {
+            background: radial-gradient(circle, #ec4899, transparent);
+            bottom: -200px;
+            right: -200px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(50px, 50px);
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 80px;
+            position: relative;
+        }
+        
+        .logo {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 30px;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 32px;
+            object-fit: cover;
+        }
+        
+        h1 {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+        
+        .tagline {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+            padding: 18px 48px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.5);
+        }
+        
+        /* Feature Cards */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 60px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            color: white;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            margin: 80px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 60px;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+        
+        .step {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
+            backdrop-filter: blur(20px);
+            padding: 32px 24px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .step p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* Privacy Section */
+        .privacy-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+            backdrop-filter: blur(20px);
+            padding: 60px;
+            border-radius: 32px;
+            margin: 80px 0;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .privacy-section h2 {
+            font-size: 36px;
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .privacy-section p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+        
+        .privacy-badges {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+        
+        .badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 24px;
+            border-radius: 50px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 16px;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        footer a:hover {
+            opacity: 0.7;
+        }
+        
+        .footer-links {
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+        
+        .copyright {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 40px;
+            }
+            
+            .tagline {
+                font-size: 20px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .privacy-section {
+                padding: 40px 24px;
+            }
+            
+            .privacy-section h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="logo">
+                <img src="logo-512.png" alt="LocBlock Logo">
+            </div>
+            <h1>LocBlock</h1>
+            <p class="tagline">Block distracting apps automatically.<br>When you enter your focus locations.</p>
+            <a href="https://apps.apple.com/app/focuslock" class="cta-button">Download for iPhone</a>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>Location-Based Blocking</h3>
+                <p>Set focus locations like your library, office, or study room. Apps block automatically when you arrive.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Smart & Automatic</h3>
+                <p>No manual effort. Walk into your focus zone, apps block. Walk out, they unlock. Simple as that.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⏰</div>
+                <h3>Break Timer</h3>
+                <p>Need a quick mental break? Take 3 minutes to recharge, then get back to focused work.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔋</div>
+                <h3>Safety First</h3>
+                <p>Auto-unlocks at 10% battery. Never get locked out when your phone is dying.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🗺️</div>
+                <h3>Interactive Maps</h3>
+                <p>Visual location selection with customizable radius. See exactly where your focus zones are.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Privacy-First</h3>
+                <p>Zero data collection. Everything stays on your device. No tracking, no servers, no compromises.</p>
+            </div>
+        </div>
+        
+        <!-- How It Works Section -->
+        <div class="how-it-works">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Choose Your Places</h3>
+                    <p>Set focus locations on an interactive map - library, coffee shop, office, anywhere you need to concentrate.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Select Apps to Block</h3>
+                    <p>Pick which apps distract you most. Social media, games, news - block whatever breaks your flow.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Focus Automatically</h3>
+                    <p>Enter your focus location and apps block instantly. Leave and they unlock. No manual toggling needed.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Privacy Section -->
+        <div class="privacy-section">
+            <h2>🛡️ Built for Privacy</h2>
+            <p>LocBlock is designed with your privacy as the top priority. Your location data, app preferences, and focus sessions never leave your iPhone. No account required, no data collected, no tracking.</p>
+            
+            <div class="privacy-badges">
+                <span class="badge">✓ No Data Collection</span>
+                <span class="badge">✓ No Analytics</span>
+                <span class="badge">✓ No Ads</span>
+                <span class="badge">✓ Open Source Ready</span>
+            </div>
+            
+            <a href="privacy.html" style="display: inline-block; margin-top: 32px; color: white; text-decoration: underline; font-weight: 600;">Read Full Privacy Policy</a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="faq.html">FAQ</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="mailto:abdelrahmanelnaggar9@icloud.com">Contact Support</a>
+            <a href="https://github.com/yourusername/focuslock">GitHub</a>
+        </div>
+        <p class="copyright">© 2025 LocBlock. All rights reserved.</p>
+    </footer>
+</body>
+</html>

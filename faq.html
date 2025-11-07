@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - LocBlock | Location-Based App Blocker for iOS</title>
+    <meta name="description" content="Frequently asked questions about LocBlock - location-based app blocker for iOS. Learn how it works, privacy details, troubleshooting, and more.">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo-180.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Custom Font for Brand -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #a8edea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-header h1 {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .faq-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-icon {
+            font-size: 36px;
+        }
+
+        .faq-item {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .faq-answer {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+        }
+
+        .faq-answer strong {
+            color: white;
+            font-weight: 600;
+        }
+
+        .faq-answer ul, .faq-answer ol {
+            margin: 16px 0 16px 24px;
+        }
+
+        .faq-answer li {
+            margin-bottom: 8px;
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.2);
+            border-left: 4px solid #10b981;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .warning-box {
+            background: rgba(251, 146, 60, 0.2);
+            border-left: 4px solid #fb923c;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .tip-box {
+            background: rgba(99, 102, 241, 0.2);
+            border-left: 4px solid #6366f1;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 80px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 36px;
+            }
+
+            .faq-card {
+                padding: 32px 24px;
+            }
+
+            .category-title {
+                font-size: 24px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">🎯 LocBlock</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="mailto:abdelrahmanelnaggar9@icloud.com">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Frequently Asked Questions</h1>
+            <p>Everything you need to know about LocBlock</p>
+        </div>
+
+        <!-- Getting Started -->
+        <div class="faq-card">
+            <h2 class="category-title"><span class="category-icon">📱</span> Getting Started</h2>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">What is LocBlock?</h3>
+                <p class="faq-answer">
+                    LocBlock is an iOS app that helps you stay focused by automatically blocking distracting apps when you enter specific locations (like your library, office, or home). It uses location-based automation and Apple's Screen Time API to create distraction-free zones.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How does it work?</h3>
+                <p class="faq-answer">
+                    <ol>
+                        <li><strong>Set Focus Locations:</strong> Choose places where you want automatic app blocking (library, office, etc.)</li>
+                        <li><strong>Select Apps:</strong> Pick which apps and websites to block</li>
+                        <li><strong>Auto-Lock:</strong> When you enter those locations, your selected apps automatically block</li>
+                        <li><strong>Auto-Unlock:</strong> When you leave, apps unlock automatically</li>
+                    </ol>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What makes LocBlock different from other blocking apps?</h3>
+                <p class="faq-answer">
+                    <ul>
+                        <li><strong>Location-based:</strong> Automatically blocks apps based on where you are, not manual timers</li>
+                        <li><strong>Privacy-first:</strong> All data stays on your device, nothing is tracked or uploaded</li>
+                        <li><strong>Smart features:</strong> Emergency break timer, low battery unlock, manual lock toggle</li>
+                        <li><strong>Minimal battery usage:</strong> Uses efficient geofencing (~2-5% battery per day)</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <!-- Features & Usage -->
+        <div class="faq-card">
+            <h2 class="category-title"><span class="category-icon">🔒</span> Features & Usage</h2>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">Can I manually lock apps outside of my focus locations?</h3>
+                <p class="faq-answer">
+                    Yes! Use the manual lock toggle on the home screen to block apps even when you're not in a designated location. It works independently from location-based locking.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What is the 3-minute break feature?</h3>
+                <p class="faq-answer">
+                    When locked, you can take a 3-minute break to check important messages or handle emergencies. After the break ends, apps automatically re-lock.
+                    <div class="tip-box">
+                        <strong>💡 Tip:</strong> Use it wisely! The break is for genuine needs, not scheduled social media checks.
+                    </div>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What happens if my battery is low?</h3>
+                <p class="faq-answer">
+                    For your safety, LocBlock automatically unlocks all apps when your battery drops to 10% or below. This prevents you from being stranded without access to maps, communication, or emergency services.
+                    <div class="highlight-box">
+                        <strong>🔋 Battery Recovery:</strong> When your battery recovers to 15% or above, the app will automatically re-lock if you're still in a focus location or had manual lock active.
+                    </div>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How accurate is location detection?</h3>
+                <p class="faq-answer">
+                    LocBlock uses geofencing with a radius you control (10m-100m). The system is optimized for accuracy while preserving battery life. In testing, it reliably detects when you enter/exit locations within 10-30 seconds.
+                </p>
+            </div>
+        </div>
+
+        <!-- Permissions & Privacy -->
+        <div class="faq-card">
+            <h2 class="category-title"><span class="category-icon">🔐</span> Permissions & Privacy</h2>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">Why does LocBlock need location permissions?</h3>
+                <p class="faq-answer">
+                    LocBlock needs location access to automatically detect when you enter or exit your focus locations. <strong>You must select "Always Allow"</strong> for the app to work in the background.
+                    <div class="highlight-box">
+                        <strong>What LocBlock doesn't do:</strong>
+                        <ul>
+                            <li>❌ Track your location history</li>
+                            <li>❌ Upload location data to servers</li>
+                            <li>❌ Share location data with anyone</li>
+                            <li>✅ Only checks if you're inside a geofence radius you defined</li>
+                        </ul>
+                    </div>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Why does LocBlock need Screen Time permission?</h3>
+                <p class="faq-answer">
+                    Screen Time permission allows LocBlock to block apps using Apple's Family Controls API. This is the only official way to restrict app access on iOS.
+                    <div class="highlight-box">
+                        <strong>What LocBlock doesn't do:</strong>
+                        <ul>
+                            <li>❌ See what apps you use</li>
+                            <li>❌ Track your screen time</li>
+                            <li>❌ Upload app usage data</li>
+                            <li>✅ Only has permission to block apps you selected</li>
+                        </ul>
+                    </div>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Is my data safe?</h3>
+                <p class="faq-answer">
+                    <strong>100% Yes.</strong> LocBlock is built with privacy as the #1 priority:
+                    <div class="highlight-box">
+                        <ul>
+                            <li>✅ All data stays on your device (locally stored)</li>
+                            <li>✅ No servers, no cloud sync, no tracking</li>
+                            <li>✅ No analytics, no third-party SDKs</li>
+                            <li>✅ No account required, no sign-in</li>
+                            <li>✅ Open about what permissions are used and why</li>
+                        </ul>
+                    </div>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Can you see what apps I'm blocking?</h3>
+                <p class="faq-answer">
+                    <strong>No.</strong> LocBlock never sees, tracks, or stores information about what apps you choose to block. That data stays encrypted on your device only.
+                </p>
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="faq-card">
+            <h2 class="category-title"><span class="category-icon">🔧</span> Troubleshooting</h2>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">The app isn't locking when I enter a location. What's wrong?</h3>
+                <p class="faq-answer">
+                    <strong>Common fixes:</strong>
+                    <ol>
+                        <li><strong>Check location permissions:</strong> Settings → LocBlock → Location → <strong>"Always Allow"</strong></li>
+                        <li><strong>Enable Background App Refresh:</strong> Settings → General → Background App Refresh → LocBlock → <strong>On</strong></li>
+                        <li><strong>Check location is enabled:</strong> In LocBlock → Manage Locations → Make sure the location toggle is green</li>
+                        <li><strong>Verify radius:</strong> The detection radius might be too small. Try increasing it.</li>
+                        <li><strong>Wait 30 seconds:</strong> Location detection can take 10-30 seconds after crossing the boundary</li>
+                    </ol>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">The app unlocks by itself even though I'm still in the location. Why?</h3>
+                <p class="faq-answer">
+                    <ul>
+                        <li><strong>GPS drift:</strong> Your phone's GPS might fluctuate. Try increasing the location radius.</li>
+                        <li><strong>Low battery:</strong> If your battery is below 10%, the app auto-unlocks for safety</li>
+                        <li><strong>Background restrictions:</strong> Make sure Background App Refresh is enabled</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What happens if I force quit LocBlock?</h3>
+                <p class="faq-answer">
+                    <strong>Blocks remain active!</strong> Force quitting does NOT stop the blocking. The shields are managed by iOS system services.
+                    <div class="highlight-box">
+                        <strong>✅ Location automation STILL WORKS!</strong>
+                        <p>LocBlock uses iOS geofencing technology that automatically wakes up the app when you enter/exit your focus locations - even after force quit! The app will launch in the background and trigger lock/unlock automatically.</p>
+                    </div>
+                    <div class="warning-box">
+                        <strong>⚠️ However, while force quit:</strong>
+                        <ul>
+                            <li>Break timers won't run (need app open)</li>
+                            <li>Manual lock toggle won't work until reopened</li>
+                            <li>Low battery monitoring paused</li>
+                        </ul>
+                    </div>
+                    <div class="tip-box">
+                        <strong>📱 After device reboot:</strong> You'll need to open the app once to resume region monitoring. iOS clears all monitored regions after a restart.
+                    </div>
+                    <strong>💡 This is a powerful feature:</strong> Location-based blocking continues working seamlessly even when the app is force quit, providing reliable focus enforcement without draining your battery!
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Can I delete the app to bypass the blocks?</h3>
+                <p class="faq-answer">
+                    Yes, but that defeats the purpose! LocBlock is designed to help you build better habits, not to forcefully restrict you. If you delete the app, restrictions are removed immediately.
+                    <div class="tip-box">
+                        <strong>💡 Tip:</strong> Think of LocBlock as a commitment device, not a prison. Your success depends on your intention to focus.
+                    </div>
+                </p>
+            </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="faq-card">
+            <h2 class="category-title"><span class="category-icon">💡</span> Best Practices</h2>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">How many locations should I set up?</h3>
+                <p class="faq-answer">
+                    <strong>Start with 2-3 key locations</strong> where you struggle with distractions:
+                    <ul>
+                        <li>Your university library</li>
+                        <li>Your home study desk</li>
+                        <li>Your office workspace</li>
+                    </ul>
+                    You can always add more later, but starting small helps build the habit.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What apps should I block?</h3>
+                <p class="faq-answer">
+                    <strong>Focus on your biggest distractions:</strong>
+                    <div class="highlight-box">
+                        <strong>✅ Block:</strong>
+                        <ul>
+                            <li>Social media (Instagram, TikTok, Twitter/X)</li>
+                            <li>Messaging apps (if appropriate)</li>
+                            <li>Gaming apps</li>
+                            <li>Entertainment (YouTube, Netflix)</li>
+                        </ul>
+                    </div>
+                    <div class="warning-box">
+                        <strong>⚠️ DON'T block:</strong>
+                        <ul>
+                            <li>Essential apps (Phone, Messages if you need them)</li>
+                            <li>Navigation apps (Maps)</li>
+                            <li>School/work apps you need</li>
+                        </ul>
+                    </div>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Should I use manual lock when working at home?</h3>
+                <p class="faq-answer">
+                    <strong>Absolutely!</strong> If your home isn't a focus location (maybe you relax there too), use manual lock to create focus sessions:
+                    <ol>
+                        <li>Sit down to study</li>
+                        <li>Toggle manual lock ON</li>
+                        <li>Focus for your study session</li>
+                        <li>Toggle OFF when done</li>
+                    </ol>
+                </p>
+            </div>
+        </div>
+
+        <!-- Support -->
+        <div class="faq-card">
+            <h2 class="category-title"><span class="category-icon">🆘</span> Support</h2>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">How do I report a bug?</h3>
+                <p class="faq-answer">
+                    Email me at: <strong><a href="mailto:abdelrahmanelnaggar9@icloud.com" style="color: white; text-decoration: underline;">abdelrahmanelnaggar9@icloud.com</a></strong>
+                    <br><br>
+                    Please include:
+                    <ul>
+                        <li>iOS version</li>
+                        <li>LocBlock version (check Settings)</li>
+                        <li>Description of the issue</li>
+                        <li>Steps to reproduce</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How do I request a feature?</h3>
+                <p class="faq-answer">
+                    I'd love to hear your ideas! Email: <strong><a href="mailto:abdelrahmanelnaggar9@icloud.com" style="color: white; text-decoration: underline;">abdelrahmanelnaggar9@icloud.com</a></strong>
+                </p>
+            </div>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">What if I need my phone for emergencies?</h3>
+                <p class="faq-answer">
+                    <strong>LocBlock includes safety features:</strong>
+                    <ul>
+                        <li>Low battery auto-unlock (&lt;10%)</li>
+                        <li>Break timer (3 minutes)</li>
+                        <li>Phone, Messages, Maps are typically left unblocked</li>
+                        <li>You can always walk outside the location radius</li>
+                    </ul>
+                    <div class="tip-box">
+                        Your safety and wellbeing come first, always.
+                    </div>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="faq.html">FAQ</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="mailto:abdelrahmanelnaggar9@icloud.com">Contact Support</a>
+        </div>
+        <p class="copyright">© 2025 LocBlock. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
